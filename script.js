@@ -118,3 +118,63 @@ function moveBall() {
     ballSpeedY = -ballSpeedY;
     playSound(wallSound);
   }
+
+  // paddle 1 collision
+  if (
+    ballX <= paddle1.clientWidth &&
+    ballY >= paddle1Y &&
+    ballY <= paddle1Y + paddle1.clientHeight
+  ) {
+    ballSpeedX = -ballSpeedX;
+    playSound(paddleSound);
+  }
+
+  // paddle 2 collision
+  if (
+    ballX >= gameWidth - paddle2.clientWidth - ball.clientWidth &&
+    ballY >= paddle2Y &&
+    ballY <= paddle2Y + paddle2.clientHeight
+  ) {
+    ballSpeedX = -ballSpeedX;
+    playSound(paddleSound);
+  }
+
+  // Out of gameArea collision
+  if (ballX <= 0) {
+    player2Score++;
+    playSound(lossSound);
+    updateScoreboard();
+    resetBall();
+    pauseGame();
+  } else if (ballX >= gameWidth - ball.clientWidth) {
+    player1Score++;
+    playSound(lossSound);
+    updateScoreboard();
+    resetBall();
+    pauseGame();
+  }
+  ball.style.left = ballX + 'px';
+  ball.style.top = ballY + 'px';
+}
+
+function updateScoreboard() {
+  player1ScoreElement.textContent = player1Score;
+  player2ScoreElement.textContent = player2Score;
+}
+
+function resetBall() {
+  ballX = gameWidth / 2 - ball.clientWidth / 2;
+  ballY = gameHeight / 2 - ball.clientHeight / 2;
+  ballSpeedX = Math.random() > 0.5 ? 2 : -2;
+  ballSpeedY = Math.random() > 0.5 ? 2 : -2;
+}
+
+function pauseGame() {
+  gameRunning = false;
+  document.addEventListener('keydown', startGame);
+}
+
+function playSound(sound) {
+  sound.currentTime = 0;
+  sound.play();
+}
