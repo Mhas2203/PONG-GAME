@@ -48,12 +48,3 @@ Contributions are welcome! To contribute to this project:
 2. **Create a new branch** for your changes.
 3. **Make your changes** and test them.
 4. **Submit a pull request** with a description of your changes.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgements
-
-- **Fonts**: [Google Fonts](https://fonts.google.com/)
-- **Sounds**: Custom sound effects created for game interactions.
